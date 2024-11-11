@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Educational Attainment by Gender</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<canvas id="educationChart" width="800" height="400"></canvas>
+
+<script>
+  const ctx = document.getElementById('educationChart').getContext('2d');
+
+  const data = {
+    labels: [
+      'Population 18 to 24 years',
+      'Less than high school graduate',
+      'High school graduate',
+      'Some college or associate\'s degree'
+    ],
+    datasets: [
+      {
+        label: 'Total %',
+        data: [42.9, 9.2, 42.9, 37.2], // Adjust based on your dataset
+        backgroundColor: 'rgba(75, 192, 192, 0.6)'
+      },
+      {
+        label: 'Male %',
+        data: [47.2, 10.8, 47.2, 33.5], // Adjust based on your dataset
+        backgroundColor: 'rgba(54, 162, 235, 0.6)'
+      },
+      {
+        label: 'Female %',
+        data: [37.4, 7.2, 37.4, 41.8], // Adjust based on your dataset
+        backgroundColor: 'rgba(255, 99, 132, 0.6)'
+      }
+    ]
+  };
+
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top',
+      },
+      tooltip: {
+        callbacks: {
+          label: function(context) {
+            return context.dataset.label + ': ' + context.raw + '%';
+          }
+        }
+      }
+    },
+    scales: {
+      x: {
+        stacked: true,
+      },
+      y: {
+        stacked: true,
+        title: {
+          display: true,
+          text: 'Percentage (%)'
+        },
+        beginAtZero: true
+      }
+    }
+  };
+
+  const educationChart = new Chart(ctx, {
+    type: 'bar',
+    data: data,
+    options: options
+  });
+</script>
+
+</body>
+</html>
